@@ -4,20 +4,33 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/Solution Items/docs/">
-    <File Path="architecture.md" />
-    <File Path="aspire.md" />
-    <File Path="azuredevops.md" />
-    <File Path="Backend-README.md" />
-    <File Path="Frontend-README.md" />
-    <File Path="jwt-auth.md" />
+    <File Path="docs/architecture.md" />
+    <File Path="docs/aspire.md" />
+    <File Path="docs/azure-pipelines.md" />
+    <File Path="docs/azuredevops.md" />
+    <File Path="docs/Backend-README.md" />
+    <File Path="docs/DOCKER-SETUP.md" />
+    <File Path="docs/DOCKER.md" />
+    <File Path="docs/Frontend-README.md" />
+    <File Path="docs/jwt-auth.md" />
+    <File Path="docs/ODATA-SETUP.md" />
+    <File Path="docs/ODATA-TESTING.md" />
+    <File Path="docs/SHARED_PROJECT_REFACTORING.md" />
+    <File Path="docs/TESTING_IMPLEMENTATION_SUMMARY.md" />
+    <File Path="docs/TESTING_QUICK_START.md" />
+    <File Path="docs/VIEWS_IMPLEMENTATION_QUICK_START.md" />
+    <File Path="docs/VIEWS_MAPPERS_UPDATE_SUMMARY.md" />
+    <File Path="docs/VIEWS_VIEWMODELS_AND_MAPPERS.md" />
     <File Path="src/NorthwindAspire.Backend/Northwind.md" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/NorthwindAspire.Backend/NorthwindAspire.Backend.csproj" />
     <Project Path="src/NorthwindAspire.Frontend/NorthwindAspire.Frontend.csproj" />
+    <Project Path="src/NorthwindAspire.Shared/NorthwindAspire.Shared.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/NorthwindAspire.Tests/NorthwindAspire.Tests.csproj" />
   </Folder>
   <Project Path="NorthwindAspire.AppHost/NorthwindAspire.AppHost.csproj" />
   <Project Path="NorthwindAspire.ServiceDefaults/NorthwindAspire.ServiceDefaults.csproj" />
-  <Project Path="NorthwindAspire.Shared/NorthwindAspire.Shared.csproj" />
-  <Project Path="NorthwindAspire.Tests/NorthwindAspire.Tests.csproj" />
 </Solution>

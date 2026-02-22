@@ -24,14 +24,13 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\NorthwindAspire.Shared\NorthwindAspire.Shared.csproj" />
-    <ProjectReference Include="..\src\NorthwindAspire.Backend\NorthwindAspire.Backend.csproj" />
-  </ItemGroup>
-
   <!-- AppHost tests will be in a separate test project if needed -->
   <ItemGroup Condition="'$(DefineConstants)' == 'INCLUDE_APPHOST'">
     <ProjectReference Include="..\NorthwindAspire.AppHost\NorthwindAspire.AppHost.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NorthwindAspire.Backend\NorthwindAspire.Backend.csproj" />
+    <ProjectReference Include="..\..\src\NorthwindAspire.Shared\NorthwindAspire.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

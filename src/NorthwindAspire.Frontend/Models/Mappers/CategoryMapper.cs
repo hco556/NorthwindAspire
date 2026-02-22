@@ -3,7 +3,7 @@ using NorthwindAspire.Frontend.Models.ViewModels;
 
 namespace NorthwindAspire.Frontend.Models.Mappers;
 
-public class CategoryMapper : IMapper<Category, CategoryViewModel>
+public class CategoryMapper : IReverseMapper<CategoryViewModel, Category>
 {
     public CategoryViewModel MapToViewModel(Category model)
     {
@@ -40,5 +40,10 @@ public class CategoryMapper : IMapper<Category, CategoryViewModel>
     public IEnumerable<Category> MapToModelList(IEnumerable<CategoryViewModel> viewModels)
     {
         return viewModels?.Select(MapToModel) ?? Enumerable.Empty<Category>();
+    }
+
+    public Category MapViewModelToModel(CategoryViewModel viewModel)
+    {
+        return MapToModel(viewModel);
     }
 }

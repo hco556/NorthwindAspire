@@ -1,6 +1,7 @@
 using MudBlazor.Services;
 using NorthwindAspire.Frontend.Components;
 using NorthwindAspire.Frontend.Models.Mappers;
+using NorthwindAspire.Frontend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,16 @@ builder.Services.AddSingleton<RegionMapper>();
 builder.Services.AddSingleton<TerritoryMapper>();
 builder.Services.AddSingleton<EmployeeTerritoryMapper>();
 builder.Services.AddSingleton<MapperRegistry>();
+
+// Register OData Frontend Service
+builder.Services.AddHttpClient<ODataFrontendService>((sp, client) =>
+{
+    var backendUrl = builder.Configuration["BackendUrl"] ?? "https://localhost:7001";
+    client.BaseAddress = new Uri(backendUrl);
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+});
+
+builder.Services.AddScoped<IODataFrontendService>(sp => sp.GetRequiredService<ODataFrontendService>());
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
