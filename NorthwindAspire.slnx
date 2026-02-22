@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../../../Downloads/northwind.db" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/docs/">
+    <File Path="architecture.md" />
+    <File Path="aspire.md" />
+    <File Path="azuredevops.md" />
+    <File Path="Backend-README.md" />
+    <File Path="Frontend-README.md" />
+    <File Path="jwt-auth.md" />
+    <File Path="Northwind.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/NorthwindAspire.Backend/NorthwindAspire.Backend.csproj" />
+    <Project Path="src/NorthwindAspire.Frontend/NorthwindAspire.Frontend.csproj" />
+  </Folder>
+  <Project Path="NorthwindAspire.AppHost/NorthwindAspire.AppHost.csproj" />
+  <Project Path="NorthwindAspire.ServiceDefaults/NorthwindAspire.ServiceDefaults.csproj" />
+  <Project Path="NorthwindAspire.Tests/NorthwindAspire.Tests.csproj" />
+</Solution>

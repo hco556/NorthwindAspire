@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    build:
+      context: .
+      dockerfile: src/NorthwindAspire.Backend/Dockerfile
+      target: build
+    volumes:
+      - ./src/NorthwindAspire.Backend:/src/src/NorthwindAspire.Backend
+      - ./NorthwindAspire.ServiceDefaults:/src/NorthwindAspire.ServiceDefaults
+    command: dotnet watch run --project src/NorthwindAspire.Backend/NorthwindAspire.Backend.csproj
+
+  frontend:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - API_URL=http://backend:8080
+    build:
+      context: .
+      dockerfile: src/NorthwindAspire.Frontend/Dockerfile
+      target: build
+    volumes:
+      - ./src/NorthwindAspire.Frontend:/src/src/NorthwindAspire.Frontend
+      - ./NorthwindAspire.ServiceDefaults:/src/NorthwindAspire.ServiceDefaults
+    command: dotnet watch run --project src/NorthwindAspire.Frontend/NorthwindAspire.Frontend.csproj
+    depends_on:
+      backend:
+        condition: service_healthy
