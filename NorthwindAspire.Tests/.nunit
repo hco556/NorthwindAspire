@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <TestRunParameters>
+    <Parameter name="ApiBaseUrl" value="http://localhost:5000" />
+    <Parameter name="ODataBaseUrl" value="/odata" />
+  </TestRunParameters>
+  
+  <NUnit>
+    <NumberOfTestWorkers>1</NumberOfTestWorkers>
+    <TimeoutInSeconds>30</TimeoutInSeconds>
+  </NUnit>
+
+  <LoggerRunSettings>
+    <Verbosity>Normal</Verbosity>
+  </LoggerRunSettings>
+</RunSettings>

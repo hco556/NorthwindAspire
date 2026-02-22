@@ -1,0 +1,83 @@
+trigger:
+  branches:
+    include:
+    - master
+    - develop
+  paths:
+    include:
+    - src/NorthwindAspire.Backend/**
+    - NorthwindAspire.Tests/**
+    - azure-pipelines-tests.yml
+
+pr:
+  branches:
+    include:
+    - master
+    - develop
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  dotnetVersion: '10.0.x'
+
+stages:
+- stage: Build
+  displayName: Build and Test
+  jobs:
+  - job: BuildAndTest
+    displayName: Build and Run Tests
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Setup .NET SDK'
+      inputs:
+        version: $(dotnetVersion)
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore NuGet packages'
+      inputs:
+        command: 'restore'
+        projects: '**/*.csproj'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Build solution'
+      inputs:
+        command: 'build'
+        arguments: '--configuration $(buildConfiguration) --no-restore'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Run Unit Tests'
+      inputs:
+        command: 'test'
+        projects: 'NorthwindAspire.Tests/NorthwindAspire.Tests.csproj'
+        arguments: '--configuration $(buildConfiguration) --no-build --logger trx --logger console --collect:"XPlat Code Coverage"'
+        publishTestResults: true
+
+    - task: PublishCodeCoverageResults@1
+      displayName: 'Publish Code Coverage'
+      condition: succeeded()
+      inputs:
+        codeCoverageTool: 'Cobertura'
+        summaryFileLocation: '$(Agent.TempDirectory)/**/*coverage.cobertura.xml'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Test Results'
+      condition: always()
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'test-results'
+
+- stage: Report
+  displayName: Generate Reports
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - job: ReportResults
+    displayName: Test Report
+    steps:
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Results'
+      inputs:
+        testResultsFormat: 'NUnit'
+        testResultsFiles: '**/*.trx'
