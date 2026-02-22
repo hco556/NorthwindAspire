@@ -66,8 +66,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
-app.MapHealthChecks("/health");
-
 // Display available endpoints
 if (app.Environment.IsDevelopment())
 {

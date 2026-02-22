@@ -8,8 +8,8 @@ using NorthwindAspire.Backend.Models;
 
 namespace NorthwindAspire.Backend.Controllers;
 
-[ApiController]
-[Route("odata/[controller]")]
+
+
 public class EmployeesController : ODataController
 {
     private readonly NorthwindContext _context;
