@@ -18,5 +18,6 @@
   </Folder>
   <Project Path="NorthwindAspire.AppHost/NorthwindAspire.AppHost.csproj" />
   <Project Path="NorthwindAspire.ServiceDefaults/NorthwindAspire.ServiceDefaults.csproj" />
+  <Project Path="NorthwindAspire.Shared/NorthwindAspire.Shared.csproj" />
   <Project Path="NorthwindAspire.Tests/NorthwindAspire.Tests.csproj" />
 </Solution>

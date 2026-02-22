@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\NorthwindAspire.Shared\NorthwindAspire.Shared.csproj" />
     <ProjectReference Include="..\..\NorthwindAspire.ServiceDefaults\NorthwindAspire.ServiceDefaults.csproj" />
   </ItemGroup>
 
