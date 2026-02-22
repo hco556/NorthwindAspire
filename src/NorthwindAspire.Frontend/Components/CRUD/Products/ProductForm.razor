@@ -1,0 +1,103 @@
+@using NorthwindAspire.Backend.Models
+@using NorthwindAspire.Frontend.Models.ViewModels
+@using NorthwindAspire.Frontend.Services
+@using MudBlazor
+@namespace NorthwindAspire.Frontend.Components.CRUD.Products
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            @(Model?.ProductId == 0 ? "Create New Product" : "Edit Product")
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+            <MudStack Spacing="3">
+                <MudTextField @bind-Value="Model!.ProductName"
+                              For="@(() => Model!.ProductName)"
+                              Label="Product Name"
+                              Required="true"
+                              RequiredError="Product Name is required"
+                              Variant="Variant.Outlined" />
+
+                <MudNumericField @bind-Value="Model!.UnitPrice"
+                                 For="@(() => Model!.UnitPrice)"
+                                 Label="Unit Price"
+                                 Format="C2"
+                                 Required="true"
+                                 Variant="Variant.Outlined" />
+
+                <MudNumericField @bind-Value="Model!.UnitsInStock"
+                                 For="@(() => Model!.UnitsInStock)"
+                                 Label="Units in Stock"
+                                 Required="true"
+                                 Variant="Variant.Outlined" />
+            </MudStack>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" 
+                   Variant="Variant.Filled" 
+                   OnClick="Submit"
+                   Disabled="@(!success)">
+            @(Model?.ProductId == 0 ? "Create" : "Update")
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+[CascadingParameter] public dynamic MudDialog { get; set; } = null!;
+
+    [Parameter]
+    public ProductViewModel? Model { get; set; }
+
+    [Inject]
+    protected IODataFrontendService ODataService { get; set; } = null!;
+
+    [Inject]
+    protected ISnackbar Snackbar { get; set; } = null!;
+
+    private MudForm? form;
+    private bool success;
+    private string[] errors = Array.Empty<string>();
+
+    protected override void OnInitialized()
+    {
+        if (Model == null)
+        {
+            Model = new ProductViewModel();
+        }
+    }
+
+    private async Task Submit()
+    {
+        if (!success)
+            return;
+
+        try
+        {
+            if (Model!.ProductId == 0)
+            {
+                await ODataService.CreateAsync<Product, ProductViewModel>(Model);
+                Snackbar.Add("Product created successfully", Severity.Success);
+            }
+            else
+            {
+                await ODataService.UpdateAsync<Product, ProductViewModel>(Model.ProductId, Model);
+                Snackbar.Add("Product updated successfully", Severity.Success);
+            }
+
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error saving product: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+}

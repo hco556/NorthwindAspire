@@ -1,0 +1,105 @@
+@using NorthwindAspire.Backend.Models
+@using NorthwindAspire.Frontend.Models.ViewModels
+@using NorthwindAspire.Frontend.Services
+@using MudBlazor
+@namespace NorthwindAspire.Frontend.Components.CRUD.Categories
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            @(Model?.CategoryId == 0 ? "Create New Category" : "Edit Category")
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+            <MudStack Spacing="3">
+                <MudTextField @bind-Value="Model!.CategoryName"
+                              For="@(() => Model!.CategoryName)"
+                              Label="Category Name"
+                              Required="true"
+                              RequiredError="Category Name is required"
+                              Variant="Variant.Outlined" />
+
+                <MudTextField @bind-Value="Model!.Description"
+                              For="@(() => Model!.Description)"
+                              Label="Description"
+                              Lines="3"
+                              Variant="Variant.Outlined" />
+            </MudStack>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" 
+                   Variant="Variant.Filled" 
+                   OnClick="Submit"
+                   Disabled="@(!success)">
+            @(Model?.CategoryId == 0 ? "Create" : "Update")
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+[CascadingParameter] public dynamic MudDialog { get; set; } = null!;
+
+    [Parameter]
+    public CategoryViewModel? Model { get; set; }
+
+    [Inject]
+    protected IODataFrontendService ODataService { get; set; } = null!;
+
+    [Inject]
+    protected ISnackbar Snackbar { get; set; } = null!;
+
+    private MudForm? form;
+    private bool success;
+    private string[] errors = Array.Empty<string>();
+    private bool isSubmitting;
+
+    protected override void OnInitialized()
+    {
+        if (Model == null)
+        {
+            Model = new CategoryViewModel();
+        }
+    }
+
+    private async Task Submit()
+    {
+        if (!success)
+            return;
+
+        try
+        {
+            isSubmitting = true;
+
+            if (Model!.CategoryId == 0)
+            {
+                // Create
+                var result = await ODataService.CreateAsync<Category, CategoryViewModel>(Model);
+                Snackbar.Add("Category created successfully", Severity.Success);
+            }
+            else
+            {
+                // Update
+                await ODataService.UpdateAsync<Category, CategoryViewModel>(Model.CategoryId, Model);
+                Snackbar.Add("Category updated successfully", Severity.Success);
+            }
+
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error saving category: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isSubmitting = false;
+        }
+    }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+}

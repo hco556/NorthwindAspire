@@ -28,7 +28,7 @@ builder.Services.AddSingleton<MapperRegistry>();
 // Register OData Frontend Service
 builder.Services.AddHttpClient<ODataFrontendService>((sp, client) =>
 {
-    var backendUrl = builder.Configuration["BackendUrl"] ?? "https://localhost:7001";
+    var backendUrl = builder.Configuration["BackendUrl"] ?? "https://localhost:7027/";
     client.BaseAddress = new Uri(backendUrl);
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
@@ -54,7 +54,7 @@ app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages:
 
 app.UseHttpsRedirection();
 
-app.MapHealthChecks("/health");
+//app.MapHealthChecks("/health");
 
 
 app.UseAntiforgery();

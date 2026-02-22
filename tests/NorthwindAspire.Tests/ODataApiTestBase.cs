@@ -6,15 +6,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using NorthwindAspire.Backend;
 using NorthwindAspire.Backend.Data;
 using NorthwindAspire.Backend.Models;
 
 namespace NorthwindAspire.Tests;
 
 /// <summary>
-/// Custom WebApplicationFactory for OData API testing
+/// Custom WebApplicationFactory for OData API testing - Uses Backend Program
 /// </summary>
-public class ODataWebApplicationFactory : WebApplicationFactory<Program>
+public class ODataWebApplicationFactory : WebApplicationFactory<BackendProgram>
 {
     private readonly string _dbName = $"TestDb_{Guid.NewGuid()}";
 

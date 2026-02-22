@@ -1,0 +1,57 @@
+@using NorthwindAspire.Backend.Models
+@using NorthwindAspire.Frontend.Models.ViewModels
+@using NorthwindAspire.Frontend.Components.CRUD
+@inherits CrudComponentBase<Customer, CustomerViewModel>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="py-8">
+    <MudStack Spacing="4">
+        <!-- Header -->
+        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+            <MudText Typo="Typo.h4">Customers</MudText>
+            <MudButton Variant="Variant.Filled" 
+                       Color="Color.Primary" 
+                       StartIcon="@Icons.Material.Filled.Add"
+                       OnClick="OpenCreateDialogAsync">
+                New Customer
+            </MudButton>
+        </MudStack>
+
+        <!-- Search Bar -->
+        <MudTextField @bind-Value="SearchString"
+                      Placeholder="Search customers..."
+                      Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search"
+                      IconSize="Size.Medium"
+                      Class="mt-0" />
+
+        <!-- Data Grid -->
+        <MudDataGrid @ref="DataGrid"
+                     Items="@Items"
+                     Loading="@IsLoading"
+                     Hover="true"
+                     Striped="true"
+                     Bordered="true">
+            <Columns>
+                <PropertyColumn Property="x => x.CustomerId" Title="ID" Sortable="true" />
+                <PropertyColumn Property="x => x.CompanyName" Title="Company" Sortable="true" />
+                <PropertyColumn Property="x => x.ContactName" Title="Contact" Sortable="true" />
+                <PropertyColumn Property="x => x.City" Title="City" Sortable="true" />
+                <TemplateColumn CellClass="d-flex gap-2">
+                    <CellTemplate>
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit" 
+                                       Size="Size.Small" 
+                                       Color="Color.Primary"
+                                       OnClick="@(() => OpenEditDialogAsync(context.Item))" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" 
+                                       Size="Size.Small" 
+                                       Color="Color.Error"
+                                       OnClick="@(() => OpenDeleteDialogAsync(context.Item.CustomerId))" />
+                    </CellTemplate>
+                </TemplateColumn>
+            </Columns>
+            <PagerContent>
+                <MudDataGridPager T="CustomerViewModel" />
+            </PagerContent>
+        </MudDataGrid>
+    </MudStack>
+</MudContainer>
