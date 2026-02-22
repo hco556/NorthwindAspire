@@ -18,7 +18,12 @@ public class MapperRegistry
         ShipperMapper? shipperMapper = null,
         RegionMapper? regionMapper = null,
         TerritoryMapper? territoryMapper = null,
-        EmployeeTerritoryMapper? employeeTerritoryMapper = null)
+        EmployeeTerritoryMapper? employeeTerritoryMapper = null,
+        OrdersQryMapper? ordersQryMapper = null,
+        InvoicesMapper? invoicesMapper = null,
+        OrderDetailsExtendedMapper? orderDetailsExtendedMapper = null,
+        SummaryOfSalesByYearMapper? summaryOfSalesByYearMapper = null,
+        CurrentProductListMapper? currentProductListMapper = null)
     {
         RegisterDefaultMappers(
             categoryMapper,
@@ -31,7 +36,12 @@ public class MapperRegistry
             shipperMapper,
             regionMapper,
             territoryMapper,
-            employeeTerritoryMapper);
+            employeeTerritoryMapper,
+            ordersQryMapper,
+            invoicesMapper,
+            orderDetailsExtendedMapper,
+            summaryOfSalesByYearMapper,
+            currentProductListMapper);
     }
 
     private void RegisterDefaultMappers(
@@ -45,7 +55,12 @@ public class MapperRegistry
         ShipperMapper? shipperMapper,
         RegionMapper? regionMapper,
         TerritoryMapper? territoryMapper,
-        EmployeeTerritoryMapper? employeeTerritoryMapper)
+        EmployeeTerritoryMapper? employeeTerritoryMapper,
+        OrdersQryMapper? ordersQryMapper,
+        InvoicesMapper? invoicesMapper,
+        OrderDetailsExtendedMapper? orderDetailsExtendedMapper,
+        SummaryOfSalesByYearMapper? summaryOfSalesByYearMapper,
+        CurrentProductListMapper? currentProductListMapper)
     {
         Register<Category, CategoryViewModel>(categoryMapper ?? new CategoryMapper());
         Register<Customer, CustomerViewModel>(customerMapper ?? new CustomerMapper());
@@ -58,6 +73,13 @@ public class MapperRegistry
         Register<Region, RegionViewModel>(regionMapper ?? new RegionMapper());
         Register<Territory, TerritoryViewModel>(territoryMapper ?? new TerritoryMapper());
         Register<EmployeeTerritory, EmployeeTerritoryViewModel>(employeeTerritoryMapper ?? new EmployeeTerritoryMapper());
+
+        // View Mappers - High Priority
+        Register<Order, OrdersQryViewModel>(ordersQryMapper ?? new OrdersQryMapper());
+        Register<OrderDetail, InvoicesViewModel>(invoicesMapper ?? new InvoicesMapper());
+        Register<OrderDetail, OrderDetailsExtendedViewModel>(orderDetailsExtendedMapper ?? new OrderDetailsExtendedMapper());
+        Register<SalesAggregate, SummaryOfSalesByYearViewModel>(summaryOfSalesByYearMapper ?? new SummaryOfSalesByYearMapper());
+        Register<Product, CurrentProductListViewModel>(currentProductListMapper ?? new CurrentProductListMapper());
     }
 
     public void Register<TModel, TViewModel>(IMapper<TModel, TViewModel> mapper)

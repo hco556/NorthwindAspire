@@ -10,7 +10,7 @@
     <File Path="Backend-README.md" />
     <File Path="Frontend-README.md" />
     <File Path="jwt-auth.md" />
-    <File Path="Northwind.md" />
+    <File Path="src/NorthwindAspire.Backend/Northwind.md" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/NorthwindAspire.Backend/NorthwindAspire.Backend.csproj" />

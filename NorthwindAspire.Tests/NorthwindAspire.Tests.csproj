@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <UserSecretsId>2a5a9e08-4386-4293-8684-2cf5ecc57336</UserSecretsId>
   </PropertyGroup>
 
 
@@ -24,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NorthwindAspire.Shared\NorthwindAspire.Shared.csproj" />
     <ProjectReference Include="..\src\NorthwindAspire.Backend\NorthwindAspire.Backend.csproj" />
   </ItemGroup>
 

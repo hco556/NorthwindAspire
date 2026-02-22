@@ -158,3 +158,55 @@ public class EmployeeTerritory
     public Employee Employee { get; set; } = null!;
     public Territory Territory { get; set; } = null!;
 }
+
+// ============================================================================
+// Intermediate DTOs for Database View Mapping
+// ============================================================================
+// These classes are used to map database views to ViewModels.
+// Views often return aggregated or denormalized data that doesn't map
+// directly to entity models, so these intermediate DTOs bridge the gap.
+
+/// <summary>
+/// Represents the Order Subtotals view result.
+/// Provides the sum of order line items for a given order.
+/// </summary>
+public class OrderSubtotal
+{
+    public int OrderId { get; set; }
+    public decimal Subtotal { get; set; }
+}
+
+/// <summary>
+/// Represents sales aggregate data from summary views.
+/// Used for Summary of Sales by Quarter/Year views.
+/// </summary>
+public class SalesAggregate
+{
+    public int? Year { get; set; }
+    public int? Quarter { get; set; }
+    public decimal SaleAmount { get; set; }
+}
+
+/// <summary>
+/// Represents category-based sales aggregates.
+/// Used for Category Sales for 1997, Product Sales for 1997, and Sales by Category views.
+/// </summary>
+public class CategorySalesAggregate
+{
+    public int? CategoryId { get; set; }
+    public string CategoryName { get; set; } = string.Empty;
+    public string ProductName { get; set; } = string.Empty;
+    public decimal ProductSales { get; set; }
+}
+
+/// <summary>
+/// Represents a customer or supplier in a specific city.
+/// Used for Customer and Suppliers by City view.
+/// </summary>
+public class CustomerSupplierByCity
+{
+    public string City { get; set; } = string.Empty;
+    public string CompanyName { get; set; } = string.Empty;
+    public string ContactName { get; set; } = string.Empty;
+    public string Relationship { get; set; } = string.Empty; // "Customers" or "Suppliers"
+}
