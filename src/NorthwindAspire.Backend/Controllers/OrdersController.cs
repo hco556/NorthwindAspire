@@ -8,8 +8,6 @@ using NorthwindAspire.Backend.Models;
 
 namespace NorthwindAspire.Backend.Controllers;
 
-
-
 public class OrdersController : ODataController
 {
     private readonly NorthwindContext _context;
@@ -27,21 +25,6 @@ public class OrdersController : ODataController
     public IQueryable<Order> Get()
     {
         return _context.Orders;
-    }
-
-    /// <summary>
-    /// Get order by ID
-    /// </summary>
-    [HttpGet("{key}")]
-    [EnableQuery]
-    public async Task<ActionResult<Order>> GetById(int key)
-    {
-        var order = await _context.Orders.FindAsync(key);
-        if (order == null)
-        {
-            return NotFound();
-        }
-        return Ok(order);
     }
 
     /// <summary>

@@ -29,20 +29,6 @@ public class EmployeesController : ODataController
         return _context.Employees;
     }
 
-    /// <summary>
-    /// Get employee by ID
-    /// </summary>
-    [HttpGet("{key}")]
-    [EnableQuery]
-    public async Task<ActionResult<Employee>> GetById(int key)
-    {
-        var employee = await _context.Employees.FindAsync(key);
-        if (employee == null)
-        {
-            return NotFound();
-        }
-        return Ok(employee);
-    }
 
     /// <summary>
     /// Create a new employee

@@ -32,7 +32,7 @@ public class EmployeeTerritoriesController : ODataController
     /// <summary>
     /// Get employee territory by EmployeeId and TerritoryId
     /// </summary>
-    [HttpGet("{key}")]
+    [HttpGet("({key})")]
     [EnableQuery]
     public async Task<ActionResult<EmployeeTerritory>> GetById([FromRoute] int key)
     {

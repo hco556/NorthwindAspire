@@ -30,21 +30,6 @@ public class ShippersController : ODataController
     }
 
     /// <summary>
-    /// Get shipper by ID
-    /// </summary>
-    [HttpGet("{key}")]
-    [EnableQuery]
-    public async Task<ActionResult<Shipper>> GetById(int key)
-    {
-        var shipper = await _context.Shippers.FindAsync(key);
-        if (shipper == null)
-        {
-            return NotFound();
-        }
-        return Ok(shipper);
-    }
-
-    /// <summary>
     /// Create a new shipper
     /// </summary>
     [HttpPost]

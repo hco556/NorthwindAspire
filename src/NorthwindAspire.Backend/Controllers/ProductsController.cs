@@ -29,20 +29,6 @@ public class ProductsController : ODataController
         return _context.Products;
     }
 
-    /// <summary>
-    /// Get product by ID
-    /// </summary>
-    [HttpGet("{key}")]
-    [EnableQuery]
-    public async Task<ActionResult<Product>> GetById(int key)
-    {
-        var product = await _context.Products.FindAsync(key);
-        if (product == null)
-        {
-            return NotFound();
-        }
-        return Ok(product);
-    }
 
     /// <summary>
     /// Create a new product

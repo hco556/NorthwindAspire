@@ -8,8 +8,6 @@ using NorthwindAspire.Backend.Models;
 
 namespace NorthwindAspire.Backend.Controllers;
 
-
-
 public class RegionsController : ODataController
 {
     private readonly NorthwindContext _context;
@@ -29,20 +27,6 @@ public class RegionsController : ODataController
         return _context.Regions;
     }
 
-    /// <summary>
-    /// Get region by ID
-    /// </summary>
-    [HttpGet("{key}")]
-    [EnableQuery]
-    public async Task<ActionResult<Region>> GetById(int key)
-    {
-        var region = await _context.Regions.FindAsync(key);
-        if (region == null)
-        {
-            return NotFound();
-        }
-        return Ok(region);
-    }
 
     /// <summary>
     /// Create a new region

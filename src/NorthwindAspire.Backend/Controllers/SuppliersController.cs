@@ -29,20 +29,6 @@ public class SuppliersController : ODataController
         return _context.Suppliers;
     }
 
-    /// <summary>
-    /// Get supplier by ID
-    /// </summary>
-    [HttpGet("{key}")]
-    [EnableQuery]
-    public async Task<ActionResult<Supplier>> GetById(int key)
-    {
-        var supplier = await _context.Suppliers.FindAsync(key);
-        if (supplier == null)
-        {
-            return NotFound();
-        }
-        return Ok(supplier);
-    }
 
     /// <summary>
     /// Create a new supplier

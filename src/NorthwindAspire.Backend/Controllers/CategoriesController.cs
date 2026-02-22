@@ -36,20 +36,6 @@ public class CategoriesController : ODataController
         return _context.Categories;
     }
 
-    /// <summary>
-    /// Get category by ID
-    /// </summary>
-    [HttpGet("{key}")]
-    [EnableQuery]
-    public async Task<ActionResult<Category>> GetById(int key)
-    {
-        var category = await _context.Categories.FindAsync(key);
-        if (category == null)
-        {
-            return NotFound();
-        }
-        return Ok(category);
-    }
 
     /// <summary>
     /// Create a new category

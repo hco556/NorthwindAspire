@@ -29,20 +29,6 @@ public class CustomersController : ODataController
         return _context.Customers;
     }
 
-    /// <summary>
-    /// Get customer by ID
-    /// </summary>
-    [HttpGet("{key}")]
-    [EnableQuery]
-    public async Task<ActionResult<Customer>> GetById(string key)
-    {
-        var customer = await _context.Customers.FindAsync(key);
-        if (customer == null)
-        {
-            return NotFound();
-        }
-        return Ok(customer);
-    }
 
     /// <summary>
     /// Create a new customer

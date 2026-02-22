@@ -30,21 +30,6 @@ public class TerritoriesController : ODataController
     }
 
     /// <summary>
-    /// Get territory by ID
-    /// </summary>
-    [HttpGet("{key}")]
-    [EnableQuery]
-    public async Task<ActionResult<Territory>> GetById(string key)
-    {
-        var territory = await _context.Territories.FindAsync(key);
-        if (territory == null)
-        {
-            return NotFound();
-        }
-        return Ok(territory);
-    }
-
-    /// <summary>
     /// Create a new territory
     /// </summary>
     [HttpPost]

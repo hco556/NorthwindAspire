@@ -29,21 +29,7 @@ public class OrderDetailsController : ODataController
         return _context.OrderDetails;
     }
 
-    /// <summary>
-    /// Get order detail by OrderId and ProductId
-    /// </summary>
-    [HttpGet("{key}")]
-    [EnableQuery]
-    public async Task<ActionResult<OrderDetail>> GetById([FromRoute] int key)
-    {
-        var orderDetail = await _context.OrderDetails
-            .FirstOrDefaultAsync(od => od.OrderId == key);
-        if (orderDetail == null)
-        {
-            return NotFound();
-        }
-        return Ok(orderDetail);
-    }
+
 
     /// <summary>
     /// Create a new order detail
