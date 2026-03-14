@@ -28,7 +28,7 @@ builder.Services.AddSingleton<MapperRegistry>();
 // Register OData Frontend Service
 builder.Services.AddHttpClient<ODataFrontendService>((sp, client) =>
 {
-    var backendUrl = builder.Configuration["BackendUrl"] ?? "https://localhost:7027/";
+    var backendUrl = builder.Configuration["BackendUrl"] ?? "https://localhost:7027";
     client.BaseAddress = new Uri(backendUrl);
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });

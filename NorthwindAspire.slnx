@@ -24,11 +24,17 @@
     <File Path="src/NorthwindAspire.Backend/Northwind.md" />
   </Folder>
   <Folder Name="/src/">
+    <Project Path="src/BlobRulesEngine.API/BlobRulesEngine.API.csproj" />
+    <Project Path="src/BlogRulesEngine/BlogRulesEngine.csproj" />
+    <Project Path="src/DemoApp.EFDataExample/DemoApp.EFDataExample.csproj" />
+    <Project Path="src/DemoApp/DemoApp.csproj" />
     <Project Path="src/NorthwindAspire.Backend/NorthwindAspire.Backend.csproj" />
     <Project Path="src/NorthwindAspire.Frontend/NorthwindAspire.Frontend.csproj" />
     <Project Path="src/NorthwindAspire.Shared/NorthwindAspire.Shared.csproj" />
+    <Project Path="src/RulesEngine/RulesEngine.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/BlogRulesEngineTests/BlogRulesEngineTests.csproj" />
     <Project Path="tests/NorthwindAspire.Tests/NorthwindAspire.Tests.csproj" />
   </Folder>
   <Project Path="NorthwindAspire.AppHost/NorthwindAspire.AppHost.csproj" />

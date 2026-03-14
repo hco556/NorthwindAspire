@@ -1,0 +1,43 @@
+﻿@using System.Text.Json
+@using NorthwindAspire.Frontend.Models.FormModels
+
+
+<MudPaper Class="pa-3">
+    <MudForm @ref="_form" Model="@Model">
+        <MudTextField Id="totalOrders" Label="Total Orders" @bind-Value="Model.TotalOrders" Immediate="true" />
+        <MudTextField Id="recurringItems" Label="Recurring Items" @bind-Value="Model.RecurringItems" Immediate="true" />
+        <MudButton  OnClick="OnSave">Save Order Info</MudButton>
+    </MudForm>
+</MudPaper>
+
+@code {
+    [Parameter, EditorRequired]
+    public string OrderJson { get; set; } = "{}";
+
+    private MudForm? _form;
+    private OrderInfoModel Model { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            var opts = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var parsed = JsonSerializer.Deserialize<OrderInfoModel>(OrderJson, opts);
+            if (parsed != null) Model = parsed;
+        }
+        catch
+        {
+            // ignore parse errors
+        }
+    }
+
+    private async Task OnSave()
+    {
+        if (_form is not null)
+        {
+            await _form.ValidateAsync();
+            // persist Model or raise event
+        }
+    }
+}
+

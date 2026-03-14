@@ -1,0 +1,43 @@
+﻿@using System.Text.Json
+@using NorthwindAspire.Frontend.Models.FormModels
+
+
+<MudPaper Class="pa-3">
+    <MudForm @ref="_form" Model="@Model">
+        <MudTextField Id="noOfVisitsPerMonth" Label="No Of Visits Per Month" @bind-Value="Model.NoOfVisitsPerMonth" Immediate="true" />
+        <MudTextField Id="percentageOfBuyingToVisit" Label="Percentage Of Buying To Visit" @bind-Value="Model.PercentageOfBuyingToVisit" Immediate="true" />
+        <MudButton OnClick="OnSave">Save Telemetry Info</MudButton>
+    </MudForm>
+</MudPaper>
+
+@code {
+    [Parameter, EditorRequired]
+    public string TelemetryJson { get; set; } = "{}";
+
+    private MudForm? _form;
+    private TelemetryInfoModel Model { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            var opts = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var parsed = JsonSerializer.Deserialize<TelemetryInfoModel>(TelemetryJson, opts);
+            if (parsed != null) Model = parsed;
+        }
+        catch
+        {
+            // ignore parse errors
+        }
+    }
+
+    private async Task OnSave()
+    {
+        if (_form is not null)
+        {
+            await _form.ValidateAsync();
+            // persist Model or raise event
+        }
+    }
+}
+

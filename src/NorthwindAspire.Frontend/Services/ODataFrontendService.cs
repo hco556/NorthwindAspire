@@ -75,7 +75,7 @@ public class ODataFrontendService : IODataFrontendService
         try
         {
             var entityName = GetEntityName<TModel>();
-            var url = $"/api/{entityName}";
+            var url = $"/odata/{entityName}";
             
             _logger.LogInformation("Requesting: {Url}", url);
             

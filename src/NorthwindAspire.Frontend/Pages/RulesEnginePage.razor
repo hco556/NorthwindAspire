@@ -1,0 +1,27 @@
+﻿@page "/rulesengine"
+@using System.Text.Json
+@inject NavigationManager NavigationManager
+@using MudBlazor
+@using NorthwindAspire.Frontend.Components.CRUD
+<MudPaper Class="pa-4">
+    <MudTabs>
+        <MudTabPanel Text="Basic Info">
+            <BasicInfoComponent BasicJson="@basicInfoJson" />
+        </MudTabPanel>
+
+@*         <MudTabPanel Text="Order Info">
+            <OrderInfoComponent OrderJson="@orderInfoJson" />
+        </MudTabPanel>
+
+        <MudTabPanel Text="Telemetry Info">
+            <TelemetryInfoComponent TelemetryJson="@telemetryInfoJson" />
+        </MudTabPanel> *@
+    </MudTabs>
+</MudPaper>
+
+@code {
+    // JSON strings provided by the user
+    private string basicInfoJson = "{\"name\": \"hello\",\"email\": \"abcy@xyz.com\",\"creditHistory\": \"good\",\"country\": \"canada\",\"loyaltyFactor\": 3,\"totalPurchasesToDate\": 10000}";
+    private string orderInfoJson = "{\"totalOrders\": 5,\"recurringItems\": 2}";
+    private string telemetryInfoJson = "{\"noOfVisitsPerMonth\": 10,\"percentageOfBuyingToVisit\": 15}";
+}

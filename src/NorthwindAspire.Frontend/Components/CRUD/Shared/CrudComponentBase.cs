@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using NorthwindAspire.Frontend.Services;
 
-namespace NorthwindAspire.Frontend.Components.CRUD;
+namespace NorthwindAspire.Frontend.Components.CRUD.Shared;
 
 public abstract class CrudComponentBase<TModel, TViewModel> : ComponentBase
     where TModel : class

@@ -1,7 +1,10 @@
 @using NorthwindAspire.Backend.Models
-@using NorthwindAspire.Frontend.Models.ViewModels
 @using NorthwindAspire.Frontend.Components.CRUD
+@using NorthwindAspire.Frontend.Components.CRUD.RulesEngine
+@using NorthwindAspire.Frontend.Components.CRUD.Shared
+@using NorthwindAspire.Frontend.Models.ViewModels
 @inherits CrudComponentBase<Product, ProductViewModel>
+@using MudBlazor
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="py-8">
     <MudStack Spacing="4">
@@ -11,7 +14,7 @@
             <MudButton Variant="Variant.Filled" 
                        Color="Color.Primary" 
                        StartIcon="@Icons.Material.Filled.Add"
-                       OnClick="OpenCreateDialogAsync">
+                       OnClick="OpenDialogAsync">
                 New Product
             </MudButton>
         </MudStack>
@@ -55,3 +58,9 @@
         </MudDataGrid>
     </MudStack>
 </MudContainer>
+@code{
+    private async Task OpenDialogAsync()
+    {
+        await base.OpenCreateDialogAsync();
+    }
+}
