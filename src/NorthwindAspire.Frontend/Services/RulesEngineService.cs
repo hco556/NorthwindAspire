@@ -6,20 +6,21 @@ using System.Text.Json;
 
 namespace NorthwindAspire.Frontend.Services
 {
-    public class MyCustomAction : ActionBase
-    {
+    //public class MyCustomAction : ActionBase
+    //{
 
-        public MyCustomAction(SomeInput someInput)
-        {
-            ....
-        }
+    //    public MyCustomAction(SomeInput someInput)
+    //    {
+    //        ....
+    //    }
 
-        public override async ValueTask<object> Run(ActionContext context, RuleParameter[] ruleParameters)
-        {
-            var customInput = context.GetContext<string>("customContextInput");
-            //Add your custom logic here
-            return await MyCustomLogicAsync();
-        }
+    //    public override async ValueTask<object> Run(ActionContext context, RuleParameter[] ruleParameters)
+    //    {
+    //        var customInput = context.GetContext<string>("customContextInput");
+    //        //Add your custom logic here
+    //        return await MyCustomLogicAsync();
+    //    }
+    //}
         public class RulesEngineService
     {
         public void Run()
