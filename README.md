@@ -88,3 +88,6 @@ dotnet build
 
 # Run the Aspire app host to test
 dotnet run --project NorthwindAspire.AppHost
+
+# RulesEngine integration
+https://microsoft.github.io/RulesEngine/?utm_source=copilot.com#steps-to-use-a-custom-action

@@ -1,5 +1,14 @@
 ﻿namespace NorthwindAspire.Frontend.Models.FormModels
 {
+    public class CustomerFormModel
+    {
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+        public string? CreditHistory { get; set; }
+        public string? Country { get; set; }
+        public int LoyaltyFactor { get; set; }
+        public decimal TotalPurchasesToDate { get; set; }
+    }
 
     public class BasicInfoModel
     {

@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/Solution Items/">
+    <File Path="../../../AppData/Local/RulesEngineDemo.db" />
     <File Path="../../../Downloads/northwind.db" />
     <File Path="README.md" />
   </Folder>

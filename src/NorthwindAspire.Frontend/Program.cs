@@ -34,7 +34,7 @@ builder.Services.AddHttpClient<ODataFrontendService>((sp, client) =>
 });
 
 builder.Services.AddScoped<IODataFrontendService>(sp => sp.GetRequiredService<ODataFrontendService>());
-
+builder.Services.AddSingleton<RulesEngineService>();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();

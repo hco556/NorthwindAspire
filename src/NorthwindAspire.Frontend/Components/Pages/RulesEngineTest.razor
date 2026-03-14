@@ -1,0 +1,51 @@
+﻿@page "/rulesengineform"
+@rendermode InteractiveServer
+@inject RulesEngineService RulesEngineService
+@using MudBlazor
+@using NorthwindAspire.Frontend.Components.CRUD.RulesEngine
+@using NorthwindAspire.Frontend.Models.FormModels
+@using NorthwindAspire.Frontend.Services
+
+<MudForm @ref="_form" Model="_model">
+    <MudTextField @bind-Value="_model.Name" Id="name" Label="Name" />
+    <MudTextField @bind-Value="_model.Email" Id="email" Label="Email" />
+    <MudTextField @bind-Value="_model.CreditHistory" Id="creditHistory" Label="Credit history" />
+    <MudTextField @bind-Value="_model.Country" Id="country" Label="Country" />
+    <MudNumericField @bind-Value="_model.LoyaltyFactor" Id="loyaltyFactor" Label="Loyalty factor" />
+    <MudNumericField @bind-Value="_model.TotalPurchasesToDate" Id="totalPurchasesToDate" Label="Total purchases to date" />
+</MudForm>
+
+<MudButton OnClick="ValidateAndExecuteRules">ValidateAndExecuteRules</MudButton>
+
+@code {
+    private MudForm? _form;
+    private CustomerFormModel _model = new();
+    protected override void OnInitialized()
+    {
+        // Initialize with some data
+        _model.Name = "hello";
+        _model.Email = "abcy@xyz.com";
+        _model.CreditHistory = "good";
+        _model.Country = "canada";
+        _model.LoyaltyFactor = 3;
+        _model.TotalPurchasesToDate = 10000;
+    }
+    private async Task ValidateAndExecuteRules()
+    {
+        if (_form is not null)
+        {
+            string basicInfoJson = "{\"name\": \"hello\",\"email\": \"abcy@xyz.com\",\"creditHistory\": \"good\",\"country\": \"canada\",\"loyaltyFactor\": 3,\"totalPurchasesToDate\": 10000}";
+            string orderInfoJson = "{\"totalOrders\": 5,\"recurringItems\": 2}";
+            string telemetryInfoJson = "{\"noOfVisitsPerMonth\": 10,\"percentageOfBuyingToVisit\": 15}";
+            RulesEngineService.Run();
+
+        }
+    }
+    private string DumpJson()
+    {
+        var json = _form!.ToJson();
+        Console.WriteLine(json);
+        return json;
+    }
+
+}
