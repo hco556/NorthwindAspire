@@ -20,7 +20,13 @@ This solution is a .NET Aspire–based sample that demonstrates:
 ├─ README.md
 ├─ docs
 │  ├─ architecture.md
-│  └─ jwt-auth.md
+│  ├─ jwt-auth.md
+│  ├─ Backend-README.md
+│  ├─ REPOSITORY_PATTERN_GUIDE.md
+│  ├─ REPOSITORY_PATTERN_EXAMPLES.md
+│  ├─ REPOSITORY_PATTERN_VISUAL_REFERENCE.md
+│  ├─ CONTROLLER_GENERATION_CHECKLIST.md
+│  └─ DOCUMENTATION_SUMMARY.md
 └─ src
    ├─ NorthwindAspire.Backend
    │  └─ README.md
@@ -88,3 +94,6 @@ dotnet build
 
 # Run the Aspire app host to test
 dotnet run --project NorthwindAspire.AppHost
+## Documentation
+
+This solution includes comprehensive documentation for implementing the **Repository Pattern** in the backend API:

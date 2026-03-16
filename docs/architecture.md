@@ -24,6 +24,10 @@ The goal is to provide a clean, observable full-stack sample with:
 
 - ASP.NET Core Web API with OData.
 - Entity Framework Core with SQLite.
+- **Repository Pattern:**
+  - Generic and entity-specific repositories for data access.
+  - Abstracts EF Core details from controllers.
+  - Simplifies testing and future database changes.
 - JWT Bearer authentication.
 - OData controllers for all Northwind tables:
   - `CustomersController`
@@ -32,6 +36,7 @@ The goal is to provide a clean, observable full-stack sample with:
   - `ProductsController`
   - `SuppliersController`
   - etc.
+- Each controller uses injected repository to perform CRUD operations.
 
 ### Northwind.MudBlazorApp
 
@@ -51,11 +56,18 @@ The goal is to provide a clean, observable full-stack sample with:
 
 - **Database:** SQLite Northwind sample.
 - **EF Core:**
-  - `NorthwindDbContext` with `DbSet<T>` for each table.
+  - `NorthwindContext` with `DbSet<T>` for each table.
   - Migrations (optional) for schema evolution.
+- **Repository Pattern:**
+  - `IGenericRepository<T>` interface for abstraction.
+  - `GenericRepository<T>` implementation for common CRUD operations.
+  - Entity-specific repositories (e.g., `ICustomerRepository`) for specialized queries.
+  - All repositories are dependency-injected into controllers.
+  - Provides loose coupling between controllers and data access logic.
 - **OData:**
   - EDM model built from EF Core entities.
   - Routes like `/odata/Customers`, `/odata/Orders`, etc.
+  - Controllers delegate to repositories for data operations.
 
 ## Security model
 
@@ -95,4 +107,11 @@ See `jwt-auth.md` for more details.
 - Front-end:
   - User-friendly error messages.
   - Logs details for diagnostics.
+
+## Documentation
+
+- **Repository Pattern Implementation**: See `REPOSITORY_PATTERN_GUIDE.md` for detailed guide on implementing and using repositories
+- **OData Testing**: See `ODATA-TESTING.md` for testing examples and query patterns
+- **JWT Authentication**: See `jwt-auth.md` for security configuration details
+
 

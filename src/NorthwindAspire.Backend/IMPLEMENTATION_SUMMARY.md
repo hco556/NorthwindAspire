@@ -67,12 +67,54 @@ All controllers inherit from `ODataController` and support full CRUD operations:
 10. **TerritoriesController** - `src/NorthwindAspire.Backend/Controllers/TerritoriesController.cs`
 11. **EmployeeTerritoriesController** - `src/NorthwindAspire.Backend/Controllers/EmployeeTerritoriesController.cs`
 
-Each controller provides:
-- `GET /odata/[entity]` - Get all with OData query support
-- `GET /odata/[entity]({key})` - Get by ID
-- `POST /odata/[entity]` - Create
-- `PATCH /odata/[entity]({key})` - Update
-- `DELETE /odata/[entity]({key})` - Delete
+Each controller:
+- Uses dependency injection to receive repository instances
+- Delegates data operations to repositories
+- Provides:
+  - `GET /odata/[entity]` - Get all with OData query support
+  - `GET /odata/[entity]({key})` - Get by ID
+  - `POST /odata/[entity]` - Create
+  - `PATCH /odata/[entity]({key})` - Update
+  - `DELETE /odata/[entity]({key})` - Delete
+
+### 6. Repository Pattern Implemented ?
+**Files**: `src/NorthwindAspire.Backend/Repositories/`
+
+#### Core Interfaces & Classes:
+
+1. **IGenericRepository<T>** - `src/NorthwindAspire.Backend/Repositories/IGenericRepository.cs`
+   - Defines shared CRUD operations for all entities
+   - Methods:
+     - `GetAllAsync()` - Retrieve all entities
+     - `GetByIdAsync(id)` - Retrieve by primary key
+     - `AddAsync(entity)` - Add new entity
+     - `UpdateAsync(entity)` - Update existing entity
+     - `DeleteAsync(id)` - Delete by ID
+     - `SaveChangesAsync()` - Persist changes to database
+
+2. **GenericRepository<T>** - `src/NorthwindAspire.Backend/Repositories/GenericRepository.cs`
+   - Generic implementation for shared CRUD logic
+   - Encapsulates Entity Framework Core DbContext usage
+   - Enables mocking for unit testing
+
+3. **Entity-Specific Repositories** (Optional)
+   - `ICustomerRepository` - For customer-specific queries
+   - `IOrderRepository` - For order-specific queries with expanded relationships
+   - `IProductRepository` - For product catalog queries
+   - etc.
+   - Extend `IGenericRepository<T>` for specialized business logic
+
+#### Dependency Injection Setup:
+- Repositories registered in `Program.cs`
+- Controllers receive repositories via constructor injection
+- Loose coupling between controllers and data access layer
+
+**Benefits:**
+- ? Centralized data access logic
+- ? Easy unit testing with mock repositories
+- ? Simplified controller code
+- ? Flexible database switching (migrate from SQLite to SQL Server, etc.)
+- ? Consistent CRUD patterns across all controllers
 
 ### Required NuGet Packages (Already Installed)
 ? Microsoft.AspNetCore.OData v9.4.1
