@@ -1,9 +1,3 @@
-﻿
----
-
-### `src/NorthwindAspire.Frontend/Frontend-README.md`
-
-```markdown
 # NorthwindAspire.Frontend
 
 This is a **Blazor Server** app using **MudBlazor** as the UI library.  
