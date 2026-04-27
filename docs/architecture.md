@@ -1,4 +1,3 @@
-
 ### `docs/architecture.md`
 
 ```markdown
@@ -68,7 +67,7 @@ The goal is to provide a clean, observable full-stack sample with:
   - Uses Windows Authentication for user identity.
   - Uses a configured mechanism to obtain a JWT:
     - Either by:
-      - Calling a token endpoint with a service credential, or
+      - Calling a token endpoint with a service credential (secured passing and don't store credentials or passwords in plain text), or
       - Locally issuing a JWT (for demo scenarios) based on Windows identity.
   - Attaches the JWT to API calls.
 
