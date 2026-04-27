@@ -1,9 +1,3 @@
-
----
-
-### `src/NorthwindAspire.Backend/Backend-README.md`
-
-```markdown
 # NorthwindAspire.Backend
 
 This project exposes the **Northwind SQLite database** as an **OData API** secured with **JWT Bearer authentication**.
