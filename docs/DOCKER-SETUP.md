@@ -4,7 +4,7 @@ Complete implementation guide for Docker containerization and orchestration in N
 
 ---
 
-## ?? Files Created
+## Files Created
 
 1. **`src/NorthwindAspire.Backend/Dockerfile`**
    - Multi-stage .NET 10 build
